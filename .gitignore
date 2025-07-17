@@ -30,3 +30,6 @@ target
 *.iml
 *.ipr
 *.iws
+
+src/main/resources/application-secret.properties
+note.txt
