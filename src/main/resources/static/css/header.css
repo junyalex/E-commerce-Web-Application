@@ -1,11 +1,11 @@
 .header {
     position: fixed;
     top: 0;
-    height: 5rem;
+    height: 4rem;
     width: 100%;
     font-size: 1rem;
-    margin-top: 2rem;
     z-index: 1;
+    margin-top: 1rem;
 }
 
 .header-inner {
@@ -57,12 +57,12 @@ button {
 
 #real-menu-button-container {
     position: fixed;
-    top: 2rem; /* .header의 margin-top과 동일하게 */
-    left: 5rem; /* .left-buttons의 padding-left와 동일하게 */
-    height: 5rem; /* .header의 height와 동일하게 */
+    top: 1rem;
+    left: 5rem;
+    height: 4rem;
     z-index: 3;
-    display: flex; /* Flexbox로 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
+    display: flex;
+    align-items: center;
 }
 
 .side-menu {
