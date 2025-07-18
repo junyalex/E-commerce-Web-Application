@@ -1,0 +1,29 @@
+/*.header {*/
+/*    width: 100%;*/
+/*    font-size: 1rem;*/
+/*}*/
+
+/*.header-inner {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+/*.left-buttons,*/
+/*.right-buttons {*/
+/*    display: flex;*/
+/*    gap: 12px;*/
+/*}*/
+
+/*button {*/
+/*    background: none;*/
+/*    border: none;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+
+/*.logo h1 {*/
+/*    margin: 0;*/
+/*    font-size: 20px;*/
+/*}*/

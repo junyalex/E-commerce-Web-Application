@@ -1,0 +1,37 @@
+<div th:fragment="header">
+    <header class="header">
+        <div class="header-inner">
+            <div class="left-buttons">
+                <button id="menu-button">
+                    <i id="menu-icon" class="fa-solid fa-bars"></i>&nbsp;&nbsp;<span id="menu-label">Menu</span>
+                </button>
+                <button><i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;Search</button>
+            </div>
+
+            <div class="logo">
+                <img th:src="@{/img/picasso_logo.png}">
+            </div>
+
+            <div class="right-buttons">
+                <button><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
+                <button><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
+                <button><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Bag</button>
+            </div>
+        </div>
+    </header>
+
+    <div id="side-menu" class="side-menu hidden">
+        <ul>
+            <li>Outer</li>
+            <li>Top</li>
+            <li>Bottom</li>
+            <li>Shoes</li>
+            <li>Accessory</li>
+        </ul>
+        <hr>
+        <div id="side-help">
+            <span id="side-help-1">Can we help you?</span><br>
+            <span>hoju.lee@mail.utoronto.ca</span>
+        </div>
+    </div>
+</div>
