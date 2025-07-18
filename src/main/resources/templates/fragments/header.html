@@ -1,11 +1,19 @@
 <div th:fragment="header">
+    <div id="real-menu-button-container">
+        <button id="menu-button-real">
+            <i id="menu-icon" class="fa-solid fa-bars"></i>&nbsp;&nbsp;<span id="menu-label">Menu</span>
+        </button>
+    </div>
+
     <header class="header">
         <div class="header-inner">
             <div class="left-buttons">
-                <button id="menu-button">
-                    <i id="menu-icon" class="fa-solid fa-bars"></i>&nbsp;&nbsp;<span id="menu-label">Menu</span>
+                <button id="menu-button-placeholder" style="visibility: hidden;">
+                    <i class="fa-solid fa-bars"></i>&nbsp;&nbsp;<span>Menu</span>
                 </button>
-                <button><i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;Search</button>
+                <button id="search-button">
+                    <i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;Search
+                </button>
             </div>
 
             <div class="logo">
@@ -35,3 +43,4 @@
         </div>
     </div>
 </div>
+

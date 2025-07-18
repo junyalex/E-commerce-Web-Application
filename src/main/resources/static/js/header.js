@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const menuBtn = document.getElementById('menu-button');
+    const menuBtn = document.getElementById('menu-button-real');
     const sideMenu = document.getElementById('side-menu');
     const menuLabel = document.getElementById('menu-label');
     const menuIcon = document.getElementById('menu-icon');

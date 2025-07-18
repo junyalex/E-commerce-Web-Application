@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Main Page</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -11,9 +13,14 @@
 <!-- Header Fragment -->
 <div th:replace="fragments/header :: header"></div>
 
+<!-- Main Section -->
+<div id="main-section" style="background-color: beige">
+    <h1>This is main section</h1>
+</div>
 
 
-
+<!-- Footer fragment-->
+<div th:replace="fragments/footer :: footer"></div>
 
 
     <script th:src="@{/js/header.js}"></script>
