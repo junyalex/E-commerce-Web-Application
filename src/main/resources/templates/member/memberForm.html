@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in Page</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+    <!-- Header Fragment -->
+    <div th:replace="fragments/header :: header"></div>
+
+    <!-- Main Section -->
+    <div id="main-section">
+        <h1>This is main section</h1>
+    </div>
+
+
+    <!-- Footer fragment-->
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
