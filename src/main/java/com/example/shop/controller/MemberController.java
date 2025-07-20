@@ -1,11 +1,16 @@
 package com.example.shop.controller;
 
 import com.example.shop.dto.MemberFormDto;
+import com.example.shop.entity.Member;
 import com.example.shop.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/members")
@@ -14,15 +19,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
     private final MemberService memberService;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * Handles GET requests to display the member registration form.
-     * @param model the model object used to pass data to the view
-     * @return the view name for the member registration form
      */
     @GetMapping("/new")
     public String memberForm(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
         return "member/memberForm";
+    }
+
+    /**
+     * Handles POST requests to sign up and store user's information to memberRepository.
+     */
+    @PostMapping("/new")
+    public String createMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            return "member/memberForm";
+        }
+
+        try {
+            Member member = Member.createMember(memberFormDto, passwordEncoder);
+            memberService.saveMember(member);
+        } catch (Exception e) {
+            return "member/memberForm";
+        }
+
+        return "redirect:/";
     }
 }
