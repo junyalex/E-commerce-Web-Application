@@ -88,18 +88,3 @@ function validatePasswordConfirm(value) {
     return value === password;
 }
 
-// Button that allows users to toggle on / off password
-function togglePassword(id, toggleBtn) {
-    const input = document.getElementById(id);
-    const icon = toggleBtn.querySelector('i');
-
-    if (!input || !icon) return;
-
-    if (input.type === 'password') {
-        input.type = 'text';
-        icon.className = 'fa fa-eye-slash';
-    } else {
-        input.type = 'password';
-        icon.className = 'fa fa-eye';
-    }
-}

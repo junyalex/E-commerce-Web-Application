@@ -49,4 +49,15 @@ public class MemberController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String memberLoginForm(Model model) {
+        return "member/memberLoginForm";
+    }
+
+    @GetMapping("/login/error")
+    public String loginError(Model model){
+        model.addAttribute("loginErrorMsg", "Please check your email and password.");
+        return "/member/memberLoginForm";
+    }
 }

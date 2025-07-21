@@ -51,7 +51,6 @@ input[type="password"] {
     border: 2px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
-    transition: border-color 0.3s;
 }
 
 input:focus {
@@ -63,14 +62,7 @@ input.invalid {
 
 }
 
-.password-toggle {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-}
+
 
 .fieldError {
     font-size: 0.75rem;

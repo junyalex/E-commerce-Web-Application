@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log in Page</title>
+    <title>Sign up Page</title>
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" th:href="@{/css/member/memberForm.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 <body>
@@ -52,9 +51,6 @@
                         <label th:for="password">Password<span>&nbsp;*</span></label>
                         <div style="position: relative;">
                             <input th:field="*{password}" type="password" id="password" name="password">
-                            <span class="password-toggle" onclick="togglePassword('password', this)">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </span>
                         </div>
                         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect data</p>
                         <p id="passwordError" class="fieldError" style="display: none;">Enter valid password</p>
@@ -66,9 +62,6 @@
                         <label for="passwordConfirm">Confirm Password<span>&nbsp;*</span></label>
                         <div style="position: relative;">
                             <input type="password" id="passwordConfirm" name="passwordConfirm">
-                            <span class="password-toggle" onclick="togglePassword('passwordConfirm', this)">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </span>
                         </div>
                         <p id="passwordConfirmError" class="fieldError" style="display: none;">Passwords do not match</p>
                     </div>
@@ -89,8 +82,8 @@
 
 
         <!-- Footer fragment-->
-        <div th:replace="fragments/footer :: footer"></div>
-        <script th:src="@{/js/member/memberForm.js}"></script>
+            <div th:replace="fragments/footer :: footer"></div>
+            <script th:src="@{/js/member/memberForm.js}"></script>
     </body>
 </html>
 

@@ -1,0 +1,88 @@
+body {
+    margin:0;
+    padding: 0;
+}
+
+form {
+    margin-top: 5rem;
+}
+
+#login-block {
+    display:flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto 25%;
+    min-height: 30rem;
+}
+
+.text {
+    font-size: 1.5rem;
+}
+
+input[type="email"],
+input[type="password"] {
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 2em;
+    margin-top: 1em;
+    min-height: 4rem;
+    padding-left: 1.5rem;
+}
+
+.required-fields{
+    text-align: right;
+}
+
+.login-button {
+    width:100%;
+    background-color: black;
+    color: white;
+    min-height: 4rem;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 2rem;
+    transition: background-color 0.5s, color 0.5s;
+    margin-bottom: 0.5rem;
+}
+
+.login-button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.error {
+    color:red;
+    margin-bottom: 2rem;
+}
+
+.sign-up-text {
+    margin: 0;
+}
+
+.signup-button {
+    width:100%;
+    background-color: white;
+    min-height: 4rem;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 2rem;
+    margin: 2rem auto;
+    transition: border 0.2s;
+}
+
+.signup-button:hover {
+    border: 2px solid black;
+    box-shadow: inset 0 0 0 1px black;
+}
+
+@media (max-width: 480px) {
+    #login-block {
+        width: 80%;
+        margin: 10% auto;
+        min-height: 70vh;
+    }
+}
