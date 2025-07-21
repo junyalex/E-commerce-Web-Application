@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
 <div th:fragment="header">
     <div id="real-menu-button-container">
         <button id="menu-button-real">
@@ -21,9 +25,12 @@
             </div>
 
             <div class="right-buttons">
-                <button><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
-                <button><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
+                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Add new item</button>
+                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Manage items</button>
+                <button sec:authorize="isAnonymous()"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
+                <button sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
                 <button><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Bag</button>
+                <button sec:authorize="isAuthenticated()">Purchase history</button>
             </div>
         </div>
     </header>
