@@ -25,12 +25,23 @@
             </div>
 
             <div class="right-buttons">
-                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Add new item</button>
-                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Manage items</button>
-                <button sec:authorize="isAnonymous()"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
-                <button sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
-                <button><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Bag</button>
-                <button sec:authorize="isAuthenticated()">Purchase history</button>
+                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')" onclick="location.href='/admin/item/new'">
+                    Add new item</button>
+
+                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')" onclick="location.href='/admin/items'">
+                    Manage items</button>
+
+                <button sec:authorize="isAnonymous()" onclick="location.href='/members/login'">
+                    <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
+                <form th:action="@{/members/logout}" method="post" sec:authorize="isAuthenticated()">
+                    <button type="submit" class="logout-button"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
+                </form>
+
+                <button sec:authorize="isAuthenticated()"><i class="fa-solid fa-bag-shopping" onclick="location.href='/cart'">
+                    </i>&nbsp;&nbsp;Bag</button>
+
+                <button sec:authorize="isAuthenticated()" onclick="location.href='/orders'">
+                    <i class="fa-solid fa-truck"></i>&nbsp;&nbsp;Orders</button>
             </div>
         </div>
     </header>
@@ -62,8 +73,9 @@
             <div class="logo2">
                 <img th:src="@{/img/picasso_logo.png}" alt="logo">
             </div>
-
+            <form th:action="@{/}" method="get">
             <input type="text" class="search-input" placeholder="Search for new items" autocomplete="off" />
+            </form>
         </div>
     </div>
 </div>
