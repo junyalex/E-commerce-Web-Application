@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
 <div th:fragment="header">
     <div id="real-menu-button-container">
         <button id="menu-button-real">
@@ -16,18 +20,22 @@
                 </button>
             </div>
 
-            <div class="logo">`
-                <img th:src="@{/img/picasso_logo.png}">
+            <div class="logo">
+                <img th:src="@{/img/picasso_logo.png}" alt="logo">
             </div>
 
             <div class="right-buttons">
-                <button><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
-                <button><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
+                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Add new item</button>
+                <button sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Manage items</button>
+                <button sec:authorize="isAnonymous()"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
+                <button sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
                 <button><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Bag</button>
+                <button sec:authorize="isAuthenticated()">Purchase history</button>
             </div>
         </div>
     </header>
 
+    <!-- Side Menu-->
     <div id="side-menu" class="side-menu hidden">
         <ul>
             <li>Outer</li>
@@ -40,6 +48,22 @@
         <div id="side-help">
             <span id="side-help-1">Can we help you?</span><br>
             <span>hoju.lee@mail.utoronto.ca</span>
+        </div>
+    </div>
+
+    <!-- Search overlay -->
+    <div id="search-overlay" class="search-overlay">
+
+        <button id="close-search" class="close-button">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div id="search-overlay-inner">
+            <div class="logo2">
+                <img th:src="@{/img/picasso_logo.png}" alt="logo">
+            </div>
+
+            <input type="text" class="search-input" placeholder="Search for new items" autocomplete="off" />
         </div>
     </div>
 </div>
