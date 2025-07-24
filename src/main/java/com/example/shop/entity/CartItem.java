@@ -7,17 +7,17 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @Table(name="cart_item")
-public class CartItem {
+public class CartItem extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name="cart_item_id")
     private Long id;
 
-    @ManyToOne  // A cart can contain multiple items
+    @ManyToOne(fetch=FetchType.LAZY)  // A cart can contain multiple items
     @JoinColumn(name="cart_id")
     private Cart cart;
 
-    @ManyToOne // An item can be stored in more than a cart
+    @ManyToOne(fetch=FetchType.LAZY) // An item can be stored in more than a cart
     @JoinColumn(name="item_id")
     private Item item;
 

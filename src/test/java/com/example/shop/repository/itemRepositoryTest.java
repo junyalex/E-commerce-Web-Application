@@ -36,7 +36,7 @@ class ItemRepositoryTest {
         item.setItemDetail("Test Description");
         item.setItemSellStatus(ItemSellStatus.SELL);
         item.setStockNumber(100);
-        item.setRegisterTime(LocalDateTime.now());
+        item.setRegTime(LocalDateTime.now());
         item.setUpdateTime(LocalDateTime.now());
         // when
         Item savedItem = itemRepository.save(item);
@@ -82,7 +82,7 @@ class ItemRepositoryTest {
             item.setItemDetail("Test Description");
             item.setItemSellStatus(ItemSellStatus.SELL);
             item.setStockNumber(100);
-            item.setRegisterTime(LocalDateTime.now());
+            item.setRegTime(LocalDateTime.now());
             item.setUpdateTime(LocalDateTime.now());
             Item savedItem = itemRepository.save(item);
         }

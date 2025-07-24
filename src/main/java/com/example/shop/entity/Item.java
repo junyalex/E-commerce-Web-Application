@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 @Table(name="item") @ToString
-public class Item {
+public class Item extends BaseEntity{
 
     @Id @Column(name="item_id") @GeneratedValue
     private Long id; // Primary key
@@ -31,7 +31,4 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; // SELL or SOLD_OUT
 
-    private LocalDateTime registerTime; // Time of item registered
-
-    private LocalDateTime updateTime; // Time of item information updated
 }
