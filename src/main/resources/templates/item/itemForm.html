@@ -1,8 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
-<div>
-    <h1>This page is for item registration</h1>
-</div>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Items</title>
+    <link rel="stylesheet" th:href="@{/css/item/itemForm.css}">
+</head>
+<body>
+    <script th:inline="javascript">
+        window.errorMessage = /*[[${errorMessage}]]*/ null;
+    </script>
 
+<form role="form" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
+        <div id="add-item-section">
+            <span id="add-text">Add new Item</span>
+
+            <input type="hidden" th:field="*{id}">
+
+            <p id="required-field">Required Fields *</p>
+
+            <div class="form-group">
+                <select th:field="*{itemSellStatus}" class="custom-select">
+                    <option value="SELL">SELL</option>
+                    <option value="SOLD_OUT">SOLD OUT</option>
+                </select>
+            </div>
+
+
+            <div class="input-group">
+                <div class="input-group-name">
+                    Item Name *
+                </div>
+                <input class="input" type="text" th:field="*{itemName}" placeholder="Enter Item Name">
+            </div>
+            <p th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}" class="fieldError">Incorrect data</p>
+
+            <div class="input-group">
+                <div class="input-group-name">
+                    Item Price *
+                </div>
+                <input class="input" type="number" th:field="*{price}" placeholder="Enter Item Price">
+            </div>
+            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="fieldError">Incorrect data</p>
+
+            <div class="input-group">
+                <div class="input-group-name">
+                    Stock Quantity *
+                </div>
+                <input class="input" type="number" th:field="*{stockNumber}" placeholder="Enter Number of Stock available">
+            </div>
+            <p th:if="${#fields.hasErrors('stockNumber')}" th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
+
+
+            <div class="input-group">
+                <div class="input-group-name">
+                    Item Description *
+                </div>
+                <textarea class="text-area" aria-label="With textarea" th:field="*{itemDetail}"
+                          placeholder="Enter Item Description"></textarea>
+            </div>
+            <p th:if="${#fields.hasErrors('itemDetail')}" th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
+
+            <div class="" th:if="${#lists.isEmpty(itemFormDto.itemImgDtoList)}">
+                <div class="" th:each="num: ${#numbers.sequence(1,5)}">
+                    <div class="insert-img">
+                        <label class="img-label" th:text="'Picture Img : ' + ${num}"></label>
+                        <input type="file" class="img-button" name="itemImgFile">
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${#strings.isEmpty(itemFormDto.id)}">
+                <button th:formaction="@{/admin/item/new}" class="button" type="submit">Save</button>
+            </div>
+            <div th:unless="${#strings.isEmpty(itemFormDto.id)}">
+                <button th:formaction="@{'/admin/item/' + ${itemFormDto.id}}" class="button" type="submit">Edit</button>
+            </div>
+        </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/item/itemForm.js}"></script>
+</body>
 </html>

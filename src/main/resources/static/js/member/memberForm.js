@@ -1,9 +1,10 @@
 // If an error occurs, alert it
-document.addEventListener('DOMContentLoaded', function () {
-    const serverErrorMessage = document.documentElement.dataset.errorMessage;
-    if (serverErrorMessage) {
-        alert(serverErrorMessage);
+$(document).ready(function(){
+    let errorMessage = window.errorMessage;
+    if(errorMessage != null && errorMessage.trim() !== ''){
+        alert(errorMessage);
     }
+    bindDomEvent();
 });
 
 // Select elements for validation check
