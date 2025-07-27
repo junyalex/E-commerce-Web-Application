@@ -40,11 +40,10 @@ form {
 
 .input, .custom-select, .text-area {
     box-sizing: border-box;
-    min-height: 2rem;
     border: 2px solid #ddd;
     border-radius: 0.5rem;
     font-size: 1rem;
-    margin-bottom: 2em;
+    margin-bottom: 0.5em;
     margin-top: 0.5em;
     padding-left: 1.5rem;
     width: 100%;
@@ -78,6 +77,10 @@ form {
     margin-bottom: 2rem;
 }
 
-.fieldError{
 
+.fieldError {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }

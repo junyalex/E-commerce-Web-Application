@@ -6,11 +6,11 @@ $(document).ready(function(){
 });
 
 function bindDomEvent(){
-    $(".custom-file-input").on("change", function() {
+    $(".img-button").on("change", function() {  // ✅ 클래스명 수정
 
         // Handling when file is not selected
         if(!this.files || this.files.length === 0) {
-            $(this).siblings(".custom-file-label").html("Select file");
+            $(this).siblings(".file-name-display").html("Select file");
             return;
         }
 
@@ -25,22 +25,22 @@ function bindDomEvent(){
         if(!allowedExtensions.includes(fileExt)) {
             alert("Can upload image file only");
             $(this).val('');
-            $(this).siblings(".custom-file-label").html("Select file");
+            $(this).siblings(".file-name-display").html("Select file");  // ✅ 수정
             return;
         }
 
         // Check file size (Has to be less than 20MB)
         let maxSize = 20 * 1024 * 1024; // 20MB
         if(file.size > maxSize) {
-            alert("File size should be less than 5MB");
+            alert("File size should be less than 20MB");
             $(this).val('');
-            $(this).siblings(".custom-file-label").html("Select file");
+            $(this).siblings(".file-name-display").html("Select file");  // ✅ 수정
             return;
         }
 
         let displayName = fileName.length > 30 ?
             fileName.substring(0, 27) + "..." : fileName;
 
-        $(this).siblings(".custom-file-label").html(displayName);
+        $(this).siblings(".file-name-display").html(displayName);  // ✅ 수정
     });
 }

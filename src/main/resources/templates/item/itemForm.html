@@ -60,12 +60,18 @@
             </div>
             <p th:if="${#fields.hasErrors('itemDetail')}" th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
 
-            <div class="" th:if="${#lists.isEmpty(itemFormDto.itemImgDtoList)}">
-                <div class="" th:each="num: ${#numbers.sequence(1,5)}">
-                    <div class="insert-img">
-                        <label class="img-label" th:text="'Picture Img : ' + ${num}"></label>
-                        <input type="file" class="img-button" name="itemImgFile">
-                    </div>
+            <p th:if="${#fields.hasErrors('itemImgDtoList')}" th:errors="*{itemImgDtoList}" class="fieldError">Image upload error</p>
+
+            <p th:if="${errorMessage != null}" th:text="${errorMessage}" class="fieldError"></p>
+
+            <div th:each="num: ${#numbers.sequence(0,4)}">
+                <div class="insert-img">
+                    <span class="file-name-display"
+                          th:text="${itemFormDto.itemImgDtoList != null && itemFormDto.itemImgDtoList.size() > num && itemFormDto.itemImgDtoList[num].oriImgName != null}
+                       ? ${itemFormDto.itemImgDtoList[num].oriImgName} : 'Select file'">Select file</span>
+                    <input type="file" class="img-button" name="itemImgFile" accept="image/*">
+                    <input type="hidden" name="itemImgIds"
+                           th:value="${itemFormDto.itemImgDtoList != null && itemFormDto.itemImgDtoList.size() > num} ? ${itemFormDto.itemImgDtoList[num].id} : ''">
                 </div>
             </div>
 
