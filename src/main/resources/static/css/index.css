@@ -1,5 +1,49 @@
+. {
+    font-family: sans-serif, Arial;
+}
 #main-section {
     margin-top: 7rem;
     min-height: 60rem;
     text-align: center;
+}
+
+#main-image {
+    width: 100%;
+}
+
+#main-video {
+    height: 75vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    z-index: 10;
+}
+
+#over-1 {
+    font-size: 2rem;
+}
+
+#over-2 {
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.card-body {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
 }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Items</title>
+    <link rel="stylesheet" th:href="@{/css/item/itemMng.css}">
+</head>
+<body>
+    <div>
+        <form th:action="@{'/admin/items/' + ${items.number}}" role="form" method="get" th:object="${items}">
+            <table>
+                <thead>
+                <tr>
+                    <td>Item id</td>
+                    <td>Item Name</td>
+                    <td>Status</td>
+                    <td>Created By</td>
+                    <td>Registered Date</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item, status: ${items.getContent()}">
+                    <td th:text="${item.id}"></td>
+                    <td>
+                        <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemName}"></a>
+                    </td>
+                    <td th:text="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL} ? 'SELL' : 'SOLD_OUT'"></td>
+                    <td th:text="${item.createdBy}"></td>
+                    <td th:text="${item.regTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${items.first}?'disabled'">
+                        <a th:onclick="${!items.first} ? 'javascript:page(' + (${items.number - 1}) + ')' : 'return false;'" aria-label='Previous' class="page-link">
+                            <span aria-hidden='true'>Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page - 1}?'active':''">
+                        <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+                    </li>
+                    <li class="page-item" th:classappend="${items.last}?'disabled'">
+                        <a th:onclick="${!items.last} ? 'javascript:page(' + (${items.number + 1}) + ')' : 'return false;'" aria-label='Next' class="page-link">
+                            <span aria-hidden='true'>Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="item-search-bar" th:object="${itemSearchDto}">
+                <select th:field="*{searchDateType}" class="form-control" style="width:auto;">
+                    <option value="all">All</option>
+                    <option value="1d">1 Day</option>
+                    <option value="1w">1 Week</option>
+                    <option value="1m">1 Month</option>
+                    <option value="6m">6 Months</option>
+                </select>
+                <select th:field="*{searchSellStatus}" class="form-control" style="width:auto;">
+                    <option value="">SELL OR SOLD_OUT</option>
+                    <option value="SELL">SELL</option>
+                    <option value="SOLD_OUT">SOLD_OUT</option>
+                </select>
+                <select th:field="*{searchBy}" class="form-control" style="width:auto;">
+                    <option value="itemName">Item Name</option>
+                    <option value="createdBy">Created By</option>
+                </select>
+                <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="Enter item name">
+                <button id="searchBtn" type="submit" class="">Search</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/item/itemMng.js}"></script>
+</body>
+
+</html>

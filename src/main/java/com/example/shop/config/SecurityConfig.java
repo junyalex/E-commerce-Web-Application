@@ -33,7 +33,7 @@ public class SecurityConfig{
 
                 // Authorization Setting
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/img/**", "/", "/members/**", "/item/**", "/images/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/img/**", "/vid/**", "/", "/members/**", "/item/**", "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

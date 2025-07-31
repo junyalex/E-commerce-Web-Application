@@ -11,11 +11,21 @@
 <body>
 
 <!-- Header Fragment -->
-<div th:replace="~{fragments/header :: header}"></div>
-
+<div th:replace="~{fragments/header :: header(items=${items}, itemSearchDto=${itemSearchDto}
+                                                            , maxPage=${maxPage})}"></div>
 <!-- Main Section -->
 <div id="main-section" style="background-color: beige">
-    <h1>This is main section</h1>
+
+    <div id="main-image">
+        <video id="main-video" width="100%" autoplay loop muted>
+            <source th:src="@{/vid/beach_walking.mp4}">
+        </video>
+    </div>
+
+    <div class="video-overlay">
+        <span id="over-1">Discover Your Style</span>
+        <span id="over-2">Find Your Perfect Match</span>
+    </div>
 </div>
 
 

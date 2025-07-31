@@ -21,7 +21,7 @@
             </div>
 
             <div class="logo">
-                <img th:src="@{/img/picasso_logo.png}" alt="logo">
+                <img th:src="@{/img/logo.png}" alt="logo">
             </div>
 
             <div class="right-buttons">
@@ -71,11 +71,24 @@
 
         <div id="search-overlay-inner">
             <div class="logo2">
-                <img th:src="@{/img/picasso_logo.png}" alt="logo">
+                <img th:src="@{/img/logo.png}" alt="logo">
             </div>
-            <form th:action="@{/}" method="get">
-            <input type="text" class="search-input" placeholder="Search for new items" autocomplete="off" />
+            <form id="search-form" th:action="@{/}" method="get">
+                <input type="text" name="searchQuery" class="search-input"
+                       placeholder="Search for new items" th:value="${itemSearchDto.searchQuery}" autocomplete="off" />
             </form>
+                <div id="search-results-container" class="item-grid" th:fragment="searchResults">
+                    <th:block th:each="item, status: ${items.getContent()}">
+                        <div class="card">
+                            <a th:href="'/item' + ${item.id}"></a>
+                            <img th:src="${item.imgUrl}" th:alt="${item.itemName}">
+                            <div class="card-body">
+                                <h4 class="card-title">[[${item.itemName}]]</h4>
+                                <h3 class="card-price">[[${item.price}]]</h3>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
         </div>
     </div>
 </div>
