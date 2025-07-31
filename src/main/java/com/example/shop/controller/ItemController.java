@@ -79,7 +79,7 @@ public class ItemController {
      * @return model which contains read item's information
      */
     @GetMapping("/admin/item/{itemId}")
-    public String itemDetail(@PathVariable Long itemId, Model model) {
+    public String itemDto(@PathVariable Long itemId, Model model) {
 
         try{
             ItemFormDto itemFormDto = itemService.getItemFormDto(itemId);
@@ -128,6 +128,13 @@ public class ItemController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 3);
         return "item/itemMng";
+    }
+
+    @GetMapping("/item/{itemId}")
+    public String itemDetail(@PathVariable Long itemId, Model model) {
+        ItemFormDto itemFormDto = itemService.getItemFormDto(itemId);
+        model.addAttribute("itemFormDto", itemFormDto);
+        return "item/itemDetail";
     }
 
 

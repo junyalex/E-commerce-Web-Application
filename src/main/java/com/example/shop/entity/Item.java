@@ -26,7 +26,8 @@ public class Item extends BaseEntity{
     @Column(nullable = false)
     private int stockNumber; // Number of stock available
 
-    @Lob @Column(nullable = false)
+    @Lob
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String itemDetail; // Item description
 
     @Enumerated(EnumType.STRING)

@@ -1,0 +1,120 @@
+#container {
+    min-height: 150vh;
+    display: flex;
+    margin-top: 5rem;
+    font-family: sans-serif, Arial;
+}
+
+#left, #right {
+    width: 50%;
+    margin: 0;
+}
+
+#left {
+    display: flex;
+    flex-direction: column;
+}
+
+#right {
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.sticky-inner {
+    position: sticky;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.img-detail-div {
+    width: 100%;
+    height: 90vh;
+}
+
+.img-detail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+#item-id {
+    font-size: .625rem;
+    font-weight: 400;
+    letter-spacing: .0625rem;
+    line-height: 1rem;
+    margin: 0 0 0.25rem;
+}
+
+#item-name{
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.5rem;
+    margin: 0 0 .25rem;
+}
+
+#item-price, .text-wrapper{
+    font-size: .875rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.25rem;
+}
+
+.text-content {
+    max-height: 3.75em;
+    overflow: hidden;
+    position: relative;
+    transition: height 0.6s ease;
+    display:block;
+    width: 100%;
+    overflow-wrap: break-word;
+}
+.text-content::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1.25em;
+    background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,1) 100%
+    );
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.text-wrapper.expanded .text-content {
+    max-height: none;
+}
+
+.text-wrapper.expanded .text-content::after {
+    opacity: 0;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 0.5em;
+    text-decoration: underline;
+    font-size: 1rem;
+}
+
+#order-button {
+    height: 2rem;
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 2rem;
+    width: 100%;
+    margin: 1.5rem 0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+#order-button:hover {
+    background-color: white;
+    color:black;
+}

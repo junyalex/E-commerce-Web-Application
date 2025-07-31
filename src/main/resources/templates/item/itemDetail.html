@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" th:href="@{/css/item/itemDetail.css}">
+    <title th:text="itemFormDto.itemName">Title</title>
+</head>
+<body>
+    <div id="container" layout:fragment="content">
+        <div id="left">
+            <div th:each="imgDto : ${itemFormDto.itemImgDtoList}" class="img-detail-div">
+                <img th:src="${imgDto.imgUrl}" alt="item detail" class="img-detail">
+            </div>
+        </div>
+
+        <div id="right">
+            <div class="sticky-inner">
+                <span th:text="${itemFormDto.id}" id="item-id">id</span><br>
+                <span th:text="${itemFormDto.itemName}" id="item-name">itemName</span><br>
+                <span th:text="'$' + ${itemFormDto.price}" id="item-price">price</span>
+
+                <button id="order-button">Place in Cart</button>
+                <div class="text-wrapper">
+                    <p th:text="${itemFormDto.itemDetail}" class="text-content" id="item-detail">itemDetail</p>
+                    <button class="toggle-btn">Read more</button>
+                </div>
+            </div>
+        </div>
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/item/itemDetail.js}"></script>
+    </th:block>
+
+    </div>
+</body>
+</html>

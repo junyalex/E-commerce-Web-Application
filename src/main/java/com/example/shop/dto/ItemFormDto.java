@@ -4,6 +4,7 @@ import com.example.shop.constant.ItemSellStatus;
 import com.example.shop.entity.Item;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
