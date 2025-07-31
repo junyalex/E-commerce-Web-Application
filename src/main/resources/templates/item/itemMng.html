@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Items</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/item/itemMng.css}">
+    <title>Login Page</title>
 </head>
 <body>
-    <div>
-        <form th:action="@{'/admin/items/' + ${items.number}}" role="form" method="get" th:object="${items}">
+    <div layout:fragment="content">
+        <form th:action="@{'/admin/items/' + ${pagedItems.number}}" role="form" method="get" th:object="${pagedItems}">
             <table>
                 <thead>
                 <tr>
@@ -19,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item, status: ${items.getContent()}">
+                <tr th:each="item, status: ${pagedItems.getContent()}">
                     <td th:text="${item.id}"></td>
                     <td>
                         <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemName}"></a>
@@ -31,18 +35,18 @@
                 </tbody>
             </table>
 
-            <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
+            <div th:with="start=${(pagedItems.number/maxPage)*maxPage + 1}, end=(${(pagedItems.totalPages == 0) ? 1 : (start + (maxPage - 1) < pagedItems.totalPages ? start + (maxPage - 1) : pagedItems.totalPages)})" >
                 <ul class="pagination">
-                    <li class="page-item" th:classappend="${items.first}?'disabled'">
-                        <a th:onclick="${!items.first} ? 'javascript:page(' + (${items.number - 1}) + ')' : 'return false;'" aria-label='Previous' class="page-link">
+                    <li class="page-item" th:classappend="${pagedItems.first}?'disabled'">
+                        <a th:onclick="${!pagedItems.first} ? 'javascript:page(' + (${pagedItems.number - 1}) + ')' : 'return false;'" aria-label='Previous' class="page-link">
                             <span aria-hidden='true'>Previous</span>
                         </a>
                     </li>
-                    <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page - 1}?'active':''">
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${pagedItems.number eq page - 1}?'active':''">
                         <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
                     </li>
-                    <li class="page-item" th:classappend="${items.last}?'disabled'">
-                        <a th:onclick="${!items.last} ? 'javascript:page(' + (${items.number + 1}) + ')' : 'return false;'" aria-label='Next' class="page-link">
+                    <li class="page-item" th:classappend="${pagedItems.last}?'disabled'">
+                        <a th:onclick="${!pagedItems.last} ? 'javascript:page(' + (${pagedItems.number + 1}) + ')' : 'return false;'" aria-label='Next' class="page-link">
                             <span aria-hidden='true'>Next</span>
                         </a>
                     </li>
@@ -70,9 +74,10 @@
                 <button id="searchBtn" type="submit" class="">Search</button>
             </div>
         </form>
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/item/itemMng.js}"></script>
+    </th:block>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script th:src="@{/js/item/itemMng.js}"></script>
 </body>
 
 </html>

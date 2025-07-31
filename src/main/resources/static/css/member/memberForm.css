@@ -1,16 +1,7 @@
-* {
-    box-sizing: border-box;
-    font-family: sans-serif, Arial;
-    font-size: 0.9rem;
-}
-
-body {
+.container {
     padding: 1.25em;
     width: 80%;
     margin: auto 10%;
-}
-.container {
-    margin-top: 2rem;
 }
 
 .container > * {
@@ -46,6 +37,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
+    box-sizing: border-box;
     width: 100%;
     padding: 12px;
     border: 2px solid #ddd;

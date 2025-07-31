@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sideMenu = document.getElementById('side-menu');
     const menuLabel = document.getElementById('menu-label');
     const menuIcon = document.getElementById('menu-icon');
+    const logo = document.querySelector('#logo');
 
     const searchButton = document.getElementById('search-button');
     const searchOverlay = document.getElementById('search-overlay');
@@ -10,6 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.querySelector('.search-input');
     const searchForm = document.getElementById('search-form');
     const searchResultsContainer = document.getElementById('search-results-container');
+
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', function () {
+        window.location.href = "/";
+    })
 
     menuBtn.addEventListener('click', function () {
         const isOpen = sideMenu.classList.toggle('active');

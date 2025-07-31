@@ -33,7 +33,7 @@
 
                 <button sec:authorize="isAnonymous()" onclick="location.href='/members/login'">
                     <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log in</button>
-                <form th:action="@{/members/logout}" method="post" sec:authorize="isAuthenticated()">
+                <form id="logout-form" th:action="@{/members/logout}" method="post" sec:authorize="isAuthenticated()">
                     <button type="submit" class="logout-button"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
                 </form>
 
@@ -77,18 +77,18 @@
                 <input type="text" name="searchQuery" class="search-input"
                        placeholder="Search for new items" th:value="${itemSearchDto.searchQuery}" autocomplete="off" />
             </form>
-                <div id="search-results-container" class="item-grid" th:fragment="searchResults">
-                    <th:block th:each="item, status: ${items.getContent()}">
-                        <div class="card">
-                            <a th:href="'/item' + ${item.id}"></a>
-                            <img th:src="${item.imgUrl}" th:alt="${item.itemName}">
-                            <div class="card-body">
-                                <h4 class="card-title">[[${item.itemName}]]</h4>
-                                <h3 class="card-price">[[${item.price}]]</h3>
-                            </div>
+            <div id="search-results-container" class="item-grid" th:fragment="searchResults">
+                <th:block th:if="${items != null and items.hasContent()}" th:each="item, status: ${items.getContent()}">
+                    <div class="card">
+                        <a th:href="'/item' + ${item.id}"></a>
+                        <img th:src="${item.imgUrl}" th:alt="${item.itemName}">
+                        <div class="card-body">
+                            <h4 class="card-title">[[${item.itemName}]]</h4>
+                            <h3 class="card-price">[[${item.price}]]</h3>
                         </div>
-                    </th:block>
-                </div>
+                    </div>
+                </th:block>
+            </div>
         </div>
     </div>
 </div>

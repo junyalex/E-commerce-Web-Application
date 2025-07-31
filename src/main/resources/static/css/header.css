@@ -30,10 +30,14 @@
     padding-right: 5rem;
 }
 
-button {
+#logout-form {
+    margin: 0;
+}
+
+.header button, #menu-button-real, #side-menu button {
     background: none;
     border: none;
-    font-size: 16px;
+    font-size: 1rem;
     cursor: pointer;
 }
 

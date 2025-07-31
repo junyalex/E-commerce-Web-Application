@@ -124,7 +124,7 @@ public class ItemController {
         // starts with 0 page if page number is not specified, and shows 3 items per page
         Pageable pageable = PageRequest.of(page.orElse(0), 3);
         Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
-        model.addAttribute("items", items);
+        model.addAttribute("pagedItems", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 3);
         return "item/itemMng";
