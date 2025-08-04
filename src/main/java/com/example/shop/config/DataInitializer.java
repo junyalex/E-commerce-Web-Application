@@ -1,12 +1,18 @@
 //package com.example.shop.config;
 //
+//import com.example.shop.constant.ItemSellStatus;
+//import com.example.shop.constant.ItemType;
 //import com.example.shop.constant.Role;
+//import com.example.shop.entity.Item;
 //import com.example.shop.entity.Member;
+//import com.example.shop.repository.ItemRepository;
 //import com.example.shop.repository.MemberRepository;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.stereotype.Component;
+//
+//import java.math.BigDecimal;
 //
 //@Component
 //@RequiredArgsConstructor
@@ -14,6 +20,7 @@
 //
 //    private final MemberRepository memberRepository;
 //    private final PasswordEncoder passwordEncoder;
+//    private final ItemRepository itemRepository;
 //
 //    @Override
 //    public void run(String... args) throws Exception {

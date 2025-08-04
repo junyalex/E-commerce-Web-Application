@@ -1,6 +1,7 @@
 package com.example.shop.repository;
 
 import com.example.shop.constant.ItemSellStatus;
+import com.example.shop.constant.ItemType;
 import com.example.shop.dto.ItemSearchDto;
 import com.example.shop.dto.MainItemDto;
 import com.example.shop.dto.QMainItemDto;
@@ -159,5 +160,40 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         long totalCount = (total != null) ? total : 0L;
 
         return new PageImpl<>(results, pageable, totalCount);
+    }
+
+    /**
+     * This function filters items by itemType and return Page of MainItemDto
+     */
+    @Override
+    public Page<MainItemDto> getItemsByType(ItemType itemType, Pageable pageable) {
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+
+        List<MainItemDto> results = queryFactory.select(
+                        new QMainItemDto(
+                                item.id,
+                                item.itemName,
+                                item.itemDetail,
+                                itemImg.imgUrl,
+                                item.price)
+                ).from(itemImg)
+                .join(itemImg.item, item)
+                .where(itemImg.repImgYn.eq("Y"))
+                .where(searchItemTypeEq(itemType))
+                .orderBy(QItem.item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        Long total = queryFactory
+                .select(item.count())
+                .from(itemImg)
+                .join(itemImg.item, item)
+                .where(itemImg.repImgYn.eq("Y"))
+                .where(searchItemTypeEq(itemType))
+                .fetchOne();
+
+        return new PageImpl<>(results, pageable, total != null ? total : 0L);
     }
 }

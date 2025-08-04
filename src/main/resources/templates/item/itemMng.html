@@ -30,9 +30,9 @@
                         <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemName}"></a>
                     </td>
                     <td th:text="${item.itemType}"></td>
-                    <td th:text="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL} ? 'SELL' : 'SOLD_OUT'"></td>
+                    <td th:text="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL ? 'SELL' : 'SOLD_OUT'}"></td>
                     <td th:text="${item.createdBy}"></td>
-                    <td th:text="${item.regTime}"></td>
+                    <td th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm')}"></td>
                 </tr>
                 </tbody>
             </table>

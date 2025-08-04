@@ -1,7 +1,9 @@
 package com.example.shop.controller;
 
+import com.example.shop.constant.ItemType;
 import com.example.shop.dto.ItemFormDto;
 import com.example.shop.dto.ItemSearchDto;
+import com.example.shop.dto.MainItemDto;
 import com.example.shop.entity.Item;
 import com.example.shop.service.ItemService;
 import jakarta.persistence.EntityNotFoundException;
@@ -138,6 +140,22 @@ public class ItemController {
         return "item/itemDetail";
     }
 
+    @GetMapping("/items/{itemType}")
+    public String itemsByCategory(
+            @PathVariable ItemType itemType,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            Model model) {
 
+        ItemSearchDto itemSearchDto = new ItemSearchDto();
+        itemSearchDto.setSearchItemType(itemType);
 
+        Pageable pageable = PageRequest.of(page, 12);
+        Page<MainItemDto> items = itemService.getItemsByType(itemType, pageable);
+
+        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("categoryName", itemType.name().toLowerCase());
+        model.addAttribute("maxPage", 5);
+        return "item/itemList";
+    }
 }

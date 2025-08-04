@@ -1,5 +1,6 @@
 package com.example.shop.service;
 
+import com.example.shop.constant.ItemType;
 import com.example.shop.dto.ItemFormDto;
 import com.example.shop.dto.ItemImgDto;
 import com.example.shop.dto.ItemSearchDto;
@@ -123,5 +124,10 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getItemsByType(ItemType itemType, Pageable pageable) {
+        return itemRepository.getItemsByType(itemType, pageable);
     }
 }

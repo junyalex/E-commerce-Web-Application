@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/item/itemMng.css}">
+    <title>Manage Item</title>
+</head>
+
+<div layout:fragment="content">
+
+    <div class="category-header">
+        <h1 th:text="${#strings.toUpperCase(categoryName)}">CATEGORY</h1>
+        <p th:text="'Discover our collection of ' + ${#strings.toLowerCase(categoryName)}">Category description</p>
+    </div>
+
+    <!-- 상품이 있는 경우 -->
+    <div th:if="${items != null and items.hasContent()}" class="item-grid">
+        <div th:each="item, status: ${items.getContent()}" class="card">
+            <a th:href="@{'/item/' + ${item.id}}">
+                <img th:src="${item.imgUrl}" th:alt="${item.itemName}" class="card-img">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${item.itemName}">Item Name</h4>
+                    <p class="card-detail" th:text="${item.itemDetail}">Item Detail</p>
+                    <h3 class="card-price" th:text="'$' + ${item.price}">Price</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 상품이 없는 경우 -->
+    <div th:if="${items == null or !items.hasContent()}" class="no-items">
+        <h3>No items found in this category</h3>
+        <p>Please check back later for new arrivals!</p>
+        <a th:href="@{/}" class="btn btn-primary">Back to Home</a>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div th:if="${items != null and items.hasContent() and items.getTotalPages() > 1}" class="pagination-wrapper">
+        <ul class="pagination justify-content-center">
+            <!-- 이전 페이지 -->
+            <li class="page-item" th:classappend="${items.number == 0} ? 'disabled' : ''">
+                <a class="page-link" th:href="@{'/items/' + ${categoryName} + '?page=' + ${items.number - 1}}"
+                   th:if="${items.number > 0}">Previous</a>
+                <span class="page-link" th:if="${items.number == 0}">Previous</span>
+            </li>
+
+            <!-- 페이지 번호들 -->
+            <li th:each="page : ${#numbers.sequence(0, items.getTotalPages() - 1)}"
+                class="page-item" th:classappend="${page == items.number} ? 'active' : ''">
+                <a class="page-link" th:href="@{'/items/' + ${categoryName} + '?page=' + ${page}}"
+                   th:text="${page + 1}">1</a>
+            </li>
+
+            <!-- 다음 페이지 -->
+            <li class="page-item" th:classappend="${items.number == items.getTotalPages() - 1} ? 'disabled' : ''">
+                <a class="page-link" th:href="@{'/items/' + ${categoryName} + '?page=' + ${items.number + 1}}"
+                   th:if="${items.number < items.getTotalPages() - 1}">Next</a>
+                <span class="page-link" th:if="${items.number == items.getTotalPages() - 1}">Next</span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+</html>
