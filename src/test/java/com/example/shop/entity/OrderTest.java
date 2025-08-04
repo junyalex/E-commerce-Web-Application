@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -124,7 +125,7 @@ class OrderTest {
     public Item createItem(){
         Item item = new Item();
         item.setItemName("Test");
-        item.setPrice(10000);
+        item.setPrice(BigDecimal.valueOf(1000.0)) ;
         item.setItemDetail("Description");
         item.setItemSellStatus(ItemSellStatus.SELL);
         item.setStockNumber(10);

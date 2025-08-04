@@ -42,6 +42,10 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         return itemSellStatus == null ? null : QItem.item.itemSellStatus.eq(itemSellStatus);
     }
 
+    private BooleanExpression searchItemTypeEq(com.example.shop.constant.ItemType itemType) {
+        return itemType == null ? null : QItem.item.itemType.eq(itemType);
+    }
+
     /**
      * Filters items registered after a specific relative date.
      *
@@ -98,6 +102,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .selectFrom(QItem.item)
                 .where(regDtsAfter(itemSearchDto.getSearchDateType()),
                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
+                        searchItemTypeEq(itemSearchDto.getSearchItemType()),
                         searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
                 .orderBy(QItem.item.id.desc())
                 .offset(pageable.getOffset())
@@ -109,6 +114,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .where(
                         regDtsAfter(itemSearchDto.getSearchDateType()),
                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
+                        searchItemTypeEq(itemSearchDto.getSearchItemType()),
                         searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery())
                 )
                 .fetchOne();

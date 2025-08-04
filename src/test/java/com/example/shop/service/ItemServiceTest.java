@@ -17,6 +17,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ class ItemServiceTest {
         itemFormDto.setItemName("Test item");
         itemFormDto.setItemSellStatus(ItemSellStatus.SELL);
         itemFormDto.setItemDetail("This item is for testing");
-        itemFormDto.setPrice(1000);
+        itemFormDto.setPrice(BigDecimal.valueOf(1000.0));
         itemFormDto.setStockNumber(100);
 
         // Saves item / item image to repository

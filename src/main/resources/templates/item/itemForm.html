@@ -26,6 +26,16 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <select th:field="*{itemType}" class="custom-select">
+                        <option value="">-- Select Item Type --</option>
+                        <option th:each="type : ${T(com.example.shop.constant.ItemType).values()}"
+                                th:value="${type}"
+                                th:text="${type}"></option>
+                    </select>
+                </div>
+                <p th:if="${#fields.hasErrors('itemType')}" th:errors="*{itemType}" class="fieldError">Incorrect data</p>
+
 
                 <div class="input-group">
                     <div class="input-group-name">
@@ -39,7 +49,7 @@
                     <div class="input-group-name">
                         Item Price *
                     </div>
-                    <input class="input" type="number" th:field="*{price}" placeholder="Enter Item Price">
+                    <input class="input" type="number" th:field="*{price}" placeholder="Enter Item Price" step="0.01">
                 </div>
                 <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="fieldError">Incorrect data</p>
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,7 +33,7 @@ class ItemRepositoryTest {
         // given
         Item item = new Item();
         item.setItemName("Test Item");
-        item.setPrice(1);
+        item.setPrice(new BigDecimal(1));
         item.setItemDetail("Test Description");
         item.setItemSellStatus(ItemSellStatus.SELL);
         item.setStockNumber(100);
@@ -62,14 +63,16 @@ class ItemRepositoryTest {
     public void findCheaperItemTest(){
         // given
         this.createItemList(); // Creates 6 items with price 10000 ~ 10005
-        int limitPrice = 10003;
+        BigDecimal limitPrice = new BigDecimal(10003);
 
         // when
         List<Item> items = itemRepository.findByPriceLessThan(limitPrice); // find items cheaper than limit
 
         // then
         for (Item item : items) {
-            Assertions.assertTrue(item.getPrice() < limitPrice);
+            Assertions.assertTrue(
+                    item.getPrice().compareTo(limitPrice) < 0
+            );
         }
     }
 
@@ -78,7 +81,7 @@ class ItemRepositoryTest {
         for(int i = 10000; i <= 10005; i++){
             Item item = new Item();
             item.setItemName("Test Item");
-            item.setPrice(i);
+            item.setPrice(new BigDecimal(i));
             item.setItemDetail("Test Description");
             item.setItemSellStatus(ItemSellStatus.SELL);
             item.setStockNumber(100);

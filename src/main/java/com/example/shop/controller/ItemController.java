@@ -127,6 +127,7 @@ public class ItemController {
         model.addAttribute("pagedItems", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 3);
+        model.addAttribute("itemTypes", com.example.shop.constant.ItemType.values());
         return "item/itemMng";
     }
 

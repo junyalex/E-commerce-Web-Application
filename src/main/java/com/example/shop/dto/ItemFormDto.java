@@ -1,6 +1,7 @@
 package com.example.shop.dto;
 
 import com.example.shop.constant.ItemSellStatus;
+import com.example.shop.constant.ItemType;
 import com.example.shop.entity.Item;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +23,16 @@ public class ItemFormDto {
     private String itemName;
 
     @NotNull(message="This field is required")
-    private Integer price;
+    private BigDecimal price;
 
     @NotBlank(message="This field is required")
     private String itemDetail;
 
     @NotNull(message="This field is required")
     private Integer stockNumber;
+
+    @NotNull(message="This field is required")
+    private ItemType itemType;
 
     private ItemSellStatus itemSellStatus;
 

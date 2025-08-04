@@ -1,12 +1,14 @@
 package com.example.shop.entity;
 
 import com.example.shop.constant.ItemSellStatus;
+import com.example.shop.constant.ItemType;
 import com.example.shop.dto.ItemFormDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,8 +22,8 @@ public class Item extends BaseEntity{
     @Column(nullable = false, length=50)
     private String itemName; // Name of item
 
-    @Column(name="price", nullable = false)
-    private int price; // price
+    @Column(name="price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price; // price
 
     @Column(nullable = false)
     private int stockNumber; // Number of stock available
@@ -33,12 +35,16 @@ public class Item extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; // SELL or SOLD_OUT
 
+    @Enumerated(EnumType.STRING)
+    private ItemType itemType; // Type of item
+
     public void updateItem(ItemFormDto itemFormDto){
         this.itemName = itemFormDto.getItemName();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+        this.itemType = itemFormDto.getItemType();
     }
 
 }

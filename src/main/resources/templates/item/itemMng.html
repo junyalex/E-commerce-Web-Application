@@ -17,6 +17,7 @@
                 <tr>
                     <td>Item id</td>
                     <td>Item Name</td>
+                    <td>Item Type</td>
                     <td>Status</td>
                     <td>Created By</td>
                     <td>Registered Date</td>
@@ -28,6 +29,7 @@
                     <td>
                         <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemName}"></a>
                     </td>
+                    <td th:text="${item.itemType}"></td>
                     <td th:text="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL} ? 'SELL' : 'SOLD_OUT'"></td>
                     <td th:text="${item.createdBy}"></td>
                     <td th:text="${item.regTime}"></td>
@@ -65,6 +67,10 @@
                     <option value="">SELL OR SOLD_OUT</option>
                     <option value="SELL">SELL</option>
                     <option value="SOLD_OUT">SOLD_OUT</option>
+                </select>
+                <select th:field="*{searchItemType}" class="form-control" style="width:auto;">
+                    <option value="">All Types</option>
+                    <option th:each="type : ${T(com.example.shop.constant.ItemType).values()}" th:value="${type}" th:text="${type}"></option>
                 </select>
                 <select th:field="*{searchBy}" class="form-control" style="width:auto;">
                     <option value="itemName">Item Name</option>
