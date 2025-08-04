@@ -43,7 +43,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         return itemSellStatus == null ? null : QItem.item.itemSellStatus.eq(itemSellStatus);
     }
 
-    private BooleanExpression searchItemTypeEq(com.example.shop.constant.ItemType itemType) {
+    private BooleanExpression searchItemTypeEq(ItemType itemType) {
         return itemType == null ? null : QItem.item.itemType.eq(itemType);
     }
 
