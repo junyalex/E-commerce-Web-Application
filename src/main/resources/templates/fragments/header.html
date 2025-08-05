@@ -77,15 +77,16 @@
                 <input type="text" name="searchQuery" class="search-input"
                        placeholder="Search for new items" th:value="${itemSearchDto.searchQuery}" autocomplete="off" />
             </form>
-            <div id="search-results-container" class="item-grid" th:fragment="searchResults">
+            <div id="search-results-container" class="search-grid" th:fragment="searchResults">
                 <th:block th:if="${items != null and items.hasContent()}" th:each="item, status: ${items.getContent()}">
-                    <div class="card">
-                        <a th:href="'/item' + ${item.id}"></a>
-                        <img th:src="${item.imgUrl}" th:alt="${item.itemName}">
-                        <div class="card-body">
-                            <h4 class="card-title">[[${item.itemName}]]</h4>
-                            <h3 class="card-price">[[${item.price}]]</h3>
-                        </div>
+                    <div class="h-card">
+                        <a th:href="@{'/item/' + ${item.id}}">
+                            <img th:src="${item.imgUrl}" th:alt="${item.itemName}" class="h-card-img">
+                            <div class="h-card-body">
+                                <span class="h-card-title" th:text="${item.itemName}">Item Name</span>
+                                <span class="h-card-price" th:text="'$' + ${item.price}">Price</span>
+                            </div>
+                        </a>
                     </div>
                 </th:block>
             </div>

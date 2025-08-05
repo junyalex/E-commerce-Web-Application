@@ -149,7 +149,7 @@ public class ItemController {
         ItemSearchDto itemSearchDto = new ItemSearchDto();
         itemSearchDto.setSearchItemType(itemType);
 
-        Pageable pageable = PageRequest.of(page, 12);
+        Pageable pageable = PageRequest.of(page, 8);
         Page<MainItemDto> items = itemService.getItemsByType(itemType, pageable);
 
         model.addAttribute("items", items);

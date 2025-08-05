@@ -173,45 +173,6 @@
     transform: translateX(-50%);
 }
 
-.item-grid {
-    display:grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    width: 100%;
-    margin: 0;
-}
-
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
-
-.card {
-    position: relative;
-    width: 100%;
-    height: 50vh;
-    border: 1px solid grey;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-.card-body {
-    background-color: transparent !important;
-}
-
-.card-title, .card-price {
-    margin: 0 auto;
-}
-
-.card-title {
-    font-size: 1.25rem;
-}
-
-.card-price {
-    font-size: 1rem;
-}
 
 #side-menu ul li a {
     position: relative;
@@ -234,20 +195,87 @@
     width: 100%;
 }
 
+/* Search Grid */
+
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    padding: 1.25rem;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.h-card-img {
+    display: block;
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    max-width: 100%;
+}
+.h-card {
+    max-height: 25rem;
+    display: block;
+    color: inherit;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.h-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.h-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.h-card a:visited {
+    color: inherit;
+}
+
+.h-card a:hover {
+    color: inherit;
+}
+
+.h-card-body {
+    position: relative;
+    padding: 0.5rem;
+    height: 20%;
+}
+
+.h-card-title {
+    text-decoration: none;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-weight: 400;
+}
+
+.h-card-price {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 0.5rem;
+    font-weight: 400;
+    color: red;
+}
+
 @media (max-width: 1200px) {
-    .item-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .search-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
-
-@media (max-width: 768px) {
-    .item-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 900px) {
+    .search-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
-
-@media (max-width: 480px) {
-    .item-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 600px) {
+    .search-grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
     }
 }

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = html;
 
-                    const items = tempDiv.querySelectorAll('.card');
+                    const items = tempDiv.querySelectorAll('.h-card');
 
                     searchResultsContainer.innerHTML = '';
                     items.forEach(item => {
