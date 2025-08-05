@@ -14,20 +14,20 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    width: 100%;
+    padding: 0 5rem;
+    box-sizing: border-box;
 }
 
 .left-buttons,
 .right-buttons {
+    width: 45%;
     display: flex;
     gap: 12px;
 }
 
-.left-buttons {
-    padding-left: 5rem;
-}
-
 .right-buttons {
-    padding-right: 5rem;
+    justify-content: flex-end;
 }
 
 #logout-form {
