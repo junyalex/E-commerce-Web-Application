@@ -54,7 +54,7 @@ class OrderTest {
             OrderItem orderItem = new OrderItem();
             orderItem.setItem(item);
             orderItem.setCount(10);
-            orderItem.setOrderPrice(1000);
+            orderItem.setOrderPrice(BigDecimal.valueOf(1000));
             orderItem.setOrder(order);
             order.getOrderItems().add(orderItem);
         }
@@ -105,7 +105,7 @@ class OrderTest {
             OrderItem orderItem = new OrderItem();
             orderItem.setItem(item);
             orderItem.setCount(10);
-            orderItem.setOrderPrice(1000);
+            orderItem.setOrderPrice(BigDecimal.valueOf(1000));
             orderItem.setOrder(order);
             order.getOrderItems().add(orderItem);
         }

@@ -93,6 +93,10 @@
     opacity: 0;
 }
 
+.quantity-selector{
+    float: right;
+}
+
 .toggle-btn {
     background: none;
     border: none;

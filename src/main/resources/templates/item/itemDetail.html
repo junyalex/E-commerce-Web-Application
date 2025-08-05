@@ -25,6 +25,12 @@
                 <span th:text="${itemFormDto.itemName}" id="item-name">itemName</span><br>
                 <span th:text="'$' + ${itemFormDto.price}" id="item-price">price</span>
 
+
+                <div class="quantity-selector">
+                    <label for="orderQ">Quantity</label>
+                    <input id="orderQ" type="number" min="1" max="999">
+                </div>
+
                 <button id="order-button">Place in Cart</button>
                 <div class="text-wrapper">
                     <p th:text="${itemFormDto.itemDetail}" class="text-content" id="item-detail">itemDetail</p>
