@@ -3,6 +3,7 @@ package com.example.shop.entity;
 import com.example.shop.constant.ItemSellStatus;
 import com.example.shop.constant.ItemType;
 import com.example.shop.dto.ItemFormDto;
+import com.example.shop.exception.OutofStockException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,6 +46,14 @@ public class Item extends BaseEntity{
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
         this.itemType = itemFormDto.getItemType();
+    }
+
+    public void removeStock(int stockNumber){
+        int remainStock = this.stockNumber - stockNumber;
+        if(remainStock < 0){
+            throw new OutofStockException("The product is out of stock. Current stock remaining : " + remainStock);
+        }
+        this.stockNumber = remainStock;
     }
 
 }

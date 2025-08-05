@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,8 +23,26 @@ public class OrderItem extends BaseEntity{
     @JoinColumn(name="order_id")
     private Order order;
 
-    private int orderPrice;
+    private BigDecimal orderPrice;
 
     private int count;
+
+    public static OrderItem createOrderItem(Item item, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(item.getPrice());
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    /**
+     * @return total price of an item ordered
+     */
+    public BigDecimal getTotalPrice(){
+        return orderPrice.multiply(new BigDecimal(count));
+    }
+
 
 }

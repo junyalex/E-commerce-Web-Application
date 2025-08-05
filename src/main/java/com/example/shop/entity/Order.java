@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,5 +30,41 @@ public class Order extends BaseEntity{
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
+
+    /**
+     * Adds OrderItem to Arraylist of OrderItems
+     * @param orderItem that member is trying to order
+     */
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    /**
+     * @param member who wants to make an order
+     * @param orderItems that member wants to order
+     * @return Order entity with given member, List of orderItems
+     */
+    public static Order createOrder(Member member, List<OrderItem> orderItems){
+        Order order = new Order();
+        order.setMember(member);
+
+        for(OrderItem orderItem : orderItems){
+            order.addOrderItem(orderItem);
+        }
+        order.setOrderDate(LocalDateTime.now());
+        order.setStatus(OrderStatus.ORDER);
+        return order;
+    }
+
+    /**
+     * Computes total price of an order and returns price
+     * @return total price in BigDecimal
+     */
+    public BigDecimal getTotalPrice() {
+        return orderItems.stream()
+                .map(OrderItem::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
 }
