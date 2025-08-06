@@ -1,0 +1,97 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+          lang="en"
+          layout:decorate="~{layouts/layout}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/cart/cartList.css}">
+        <title>Cart</title>
+    </head>
+    <body>
+    <div layout:fragment="content">
+
+        <div id="cart">
+            <div id="cart-left">
+                <div id="cart-title">
+                    <span id="cart-des">My Shopping Cart</span>
+                    <span id="cart-count">&nbsp;(1)</span>
+                </div>
+
+                <div th:each="cartItem : ${cartItems}" class="cart-item">
+                    <div class="item-left">
+                        <img th:src="${cartItem.imgUrl}" alt="item-img">
+                    </div>
+                    <div class="item-right">
+                        <div class="item-info">
+                            <div class="item-info-l">
+                                <span th:text="${cartItem.itemId}" id="item-id">item-id</span>
+                                <span th:text="${cartItem.itemName}" id="item-name">item-name</span>
+                            </div>
+                            <div class="item-info-r">
+                                <a th:href="@{/item/{id}(id=${cartItem.getItemId()})}" class="btn-link">
+                                    <i class="fa-solid fa-greater-than"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="q-info">
+                            <div class="custom-select">
+                                <select>
+                                    <option th:each="n : ${#numbers.sequence(1,5)}"
+                                            th:value="${n}"
+                                            th:text="${n}"
+                                            th:selected="${cartItem.count}">
+                                    </option>
+
+                                    <option th:if="${cartItem.count > 5}"
+                                            th:value="${cartItem.count}"
+                                            th:text="${cartItem.count}"
+                                            th:selected="true">
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <span id="item-price">$11</span>
+                            </div>
+                        </div>
+
+
+
+
+                        <div id="remove">
+                            <button id="remove-btn"><i class="fa-solid fa-xmark"></i>&nbsp;Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cart-right">
+                <div id="cart-info">
+                    <div class="price-info">
+                        <span>Subtotal</span>
+                        <span>$11</span>
+                    </div>
+                    <div class="price-info">
+                        <span>Shipping</span>
+                        <span>$0</span>
+                    </div>
+                    <div class="f-price-info">
+                        <span>Total</span>
+                        <span>$11</span>
+                    </div>
+
+                    <button id="order-btn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/js/cart/cartList.js}"></script>
+        </th:block>
+    </div>
+    </body>
+    </html>
+
+

@@ -27,21 +27,45 @@
 
 
                 <div class="quantity-selector">
-                    <label for="orderQ">Quantity</label>
-                    <input id="orderQ" type="number" min="1" max="999">
+                    <label for="count">Quantity</label>
+                    <input id="count" type="number" min="1" max="999" value="1">
                 </div>
 
-                <button id="order-button">Place in Cart</button>
+                <button id="order-button" onclick="addCart()">Place in Cart</button>
                 <div class="text-wrapper">
                     <p th:text="${itemFormDto.itemDetail}" class="text-content" id="item-detail">itemDetail</p>
                     <button class="toggle-btn">Read more</button>
                 </div>
             </div>
         </div>
+
+        <div id="whole-screen">
+            <div id="added-screen">
+                <div id="added-title">
+                    <span>Item has been added to cart</span>
+                    <button onclick="hideAdded()" id="close-btn-2"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div id="item-detail2">
+                    <div id="add-img">
+                        <img th:src="@{${itemFormDto.itemImgDtoList[0].imgUrl}}" alt="img">                    </div>
+                    <div id="item-info">
+                        <span id="id2" th:text="${itemFormDto.id}">id</span>
+                        <span id="name2" th:text="${itemFormDto.itemName}">itemName</span>
+                        <span id="price2" th:text="'$' + ${itemFormDto.price}">price</span>
+                    </div>
+                </div>
+
+                <div id="add-buttons">
+                    <a th:href="@{/cart}" id="gtc">Go to Cart</a>
+                    <button id="csb" onclick="hideAdded()">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <th:block layout:fragment="script">
         <script th:src="@{/js/item/itemDetail.js}"></script>
     </th:block>
-
-    </div>
 </body>
 </html>

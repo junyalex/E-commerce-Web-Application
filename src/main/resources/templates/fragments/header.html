@@ -37,8 +37,9 @@
                     <button type="submit" class="logout-button"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log out</button>
                 </form>
 
-                <button sec:authorize="isAuthenticated()"><i class="fa-solid fa-bag-shopping" onclick="location.href='/cart'">
-                    </i>&nbsp;&nbsp;Bag</button>
+                <button sec:authorize="isAuthenticated()" onclick="location.href='/cart'" >
+                    <i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Bag
+                </button>
 
                 <button sec:authorize="isAuthenticated()" onclick="location.href='/orders'">
                     <i class="fa-solid fa-truck"></i>&nbsp;&nbsp;Orders</button>

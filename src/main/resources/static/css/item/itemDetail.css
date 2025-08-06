@@ -108,7 +108,7 @@
 }
 
 #order-button {
-    height: 2rem;
+    min-height: 2.5rem;
     color: white;
     background-color: black;
     border: 1px solid black;
@@ -121,4 +121,146 @@
 #order-button:hover {
     background-color: white;
     color:black;
+}
+
+#whole-screen {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2000;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+#added-screen {
+    padding: 1.5rem;
+    width: 33%;
+    height: 50%;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+}
+
+#whole-screen.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#whole-screen.show #added-screen {
+    transform: translateY(0);
+}
+
+#added-title {
+    height: 10%;
+}
+
+#close-btn-2 {
+    cursor: pointer;
+}
+
+#added-title button {
+    background-color: transparent;
+    border: none;
+    float: right;
+}
+
+#item-detail2 {
+    display: flex;
+    width: 100%;
+    height: 45%;
+}
+
+#add-img {
+    width: 34%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#add-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+#item-info {
+    margin: auto auto 1rem auto;
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+}
+#add-buttons {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#add-buttons a,
+#add-buttons button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    min-height: 2.5rem;
+    border: 1px solid black;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#gtc {
+    background-color: black;
+    color: white;
+}
+
+#gtc:hover {
+    background-color: white;
+    color:black;
+}
+
+#csb {
+    background-color: white;
+    color: black;
+}
+
+#csb:hover {
+    background-color: black;
+    color: white;
+}
+#id2{
+    font-size: .625rem;
+    font-weight: 400;
+    letter-spacing: .0625rem;
+    line-height: 1rem;
+}
+
+#name2{
+    font-size: .875rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.25rem;
+}
+
+#price2{
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.5rem;
 }
