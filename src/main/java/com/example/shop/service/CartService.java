@@ -79,4 +79,25 @@ public class CartService {
 
         return cartItemRepository.findCartDetailDtoByCartId(cart.getId());
     }
+
+    /**
+     * @param cartItemId : id of cartItem added by user
+     * @param email : email of logged in member
+     * @return {@code true} if the member owns the cart item; {@code false} otherwise
+     */
+    @Transactional(readOnly = true)
+    public boolean validateCartItem(Long cartItemId, String email){
+        Member member = memberRepository.findByEmail(email);
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
+        Member member2 = cartItem.getCart().getMember();
+
+        return member.getEmail().equals(member2.getEmail());
+    }
+
+    // Update cartItem's quantity in member's cart.
+    public void updateCartItemCount(Long cartItemId, int count){
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
+        cartItem.updateCount(count);
+    }
+
 }

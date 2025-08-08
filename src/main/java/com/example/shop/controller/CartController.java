@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -34,7 +31,7 @@ public class CartController {
      *         or an error message and HTTP 400 on validation or processing failure
      */
     @PostMapping("/cart")
-    public @ResponseBody ResponseEntity order(
+    public @ResponseBody ResponseEntity<?> order(
             @RequestBody @Valid CartItemDto cartItemDto,
             BindingResult bindingResult,
             Principal principal
@@ -66,5 +63,24 @@ public class CartController {
         List<CartDetailDTo> cartItems = cartService.getCartItems(principal.getName());
         model.addAttribute("cartItems", cartItems);
         return "cart/cartList";
+    }
+
+    /**
+     * @return ResponseEntity<Long cartItemId> if count has been updated successfully,
+     *         else ResponseEntity<String errorMessage>
+     */
+    @PatchMapping("/cartItem/{cartItemId}")
+    public @ResponseBody ResponseEntity<?> updateCartItem(
+            @PathVariable("cartItemId") Long cartItemId, int count, Principal principal
+    ){
+        if(count <= 0){
+            return new ResponseEntity<String>("Select at least one item", HttpStatus.BAD_REQUEST);
+        } else if (cartService.validateCartItem(cartItemId, principal.getName())) {
+            // if member is validated, update count of CartItem
+            cartService.updateCartItemCount(cartItemId, count);
+            return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+        }
+        // member is not validated
+        return new ResponseEntity<String>("No Authorization", HttpStatus.BAD_REQUEST);
     }
 }
