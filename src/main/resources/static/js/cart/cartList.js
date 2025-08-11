@@ -62,3 +62,32 @@ function updateCartItemCount(cartItemId, count){
         }
     })
 }
+
+function removeCart(obj){
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    let cartItemId = obj.dataset.id;
+    let url = "/cartItem/" + cartItemId;
+
+    $.ajax({
+        url: url,
+        type: "DELETE",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        dataType: "json",
+        cache: false,
+        success: function(result, status) {
+            location.href="/cart"
+        },
+        error: function(jqXHR, status, error) {
+            if(jqXHR.status === 401){
+                location.href='/members/login';
+            } else {
+                alert(jqXHR.responseText);
+            }
+        }
+    })
+
+
+}

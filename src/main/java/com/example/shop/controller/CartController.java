@@ -2,6 +2,7 @@ package com.example.shop.controller;
 
 import com.example.shop.dto.CartDetailDTo;
 import com.example.shop.dto.CartItemDto;
+import com.example.shop.entity.CartItem;
 import com.example.shop.service.CartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -83,4 +84,22 @@ public class CartController {
         // member is not validated
         return new ResponseEntity<String>("No Authorization", HttpStatus.BAD_REQUEST);
     }
+
+    /**
+     * Delete Item from Cart
+     * @param cartItemId that user wants to remove from cart
+     * @return 200 OK if id has deleted successfully or 403 Forbidden if authorization fails
+     */
+    @DeleteMapping("/cartItem/{cartItemId}")
+    public @ResponseBody ResponseEntity<?> deleteCartItem(
+            @PathVariable("cartItemId") Long cartItemId,
+            Principal principal){
+
+        if(!cartService.validateCartItem(cartItemId, principal.getName())){
+            return new ResponseEntity<String>("No access to this change", HttpStatus.FORBIDDEN);
+        }
+        cartService.deleteCartItem(cartItemId);
+        return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+    }
+
 }
