@@ -13,6 +13,6 @@ public class OrderDto {
     private Long itemId;
 
     @Min(value = 1, message="You need to add at least 1 item.")
-    @Max(value = 99, message="You can order up to 999 items.")
+    @Max(value = 99, message="You can order up to 99 items.")
     private int count;
 }

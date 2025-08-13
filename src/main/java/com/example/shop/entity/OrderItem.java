@@ -44,5 +44,12 @@ public class OrderItem extends BaseEntity{
         return orderPrice.multiply(new BigDecimal(count));
     }
 
+    /**
+     * Adds stock to item when order is cancelled
+     */
+    public void cancel(){
+        this.getItem().addStock(count);
+    }
+
 
 }

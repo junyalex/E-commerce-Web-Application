@@ -48,12 +48,23 @@ public class Item extends BaseEntity{
         this.itemType = itemFormDto.getItemType();
     }
 
+    /**
+     * When an order is placed, this function removes number of stocks left
+     * @param stockNumber : number of stock that order has been placed.
+     */
     public void removeStock(int stockNumber){
         int remainStock = this.stockNumber - stockNumber;
         if(remainStock < 0){
             throw new OutofStockException("The product is out of stock. Current stock remaining : " + remainStock);
         }
         this.stockNumber = remainStock;
+    }
+
+    /**
+     * When an order is cancelled, add stock back to item.
+     */
+    public void addStock(int stockNumber){
+        this.stockNumber += stockNumber;
     }
 
 }

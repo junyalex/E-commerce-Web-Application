@@ -2,10 +2,12 @@ package com.example.shop.controller;
 
 import com.example.shop.dto.CartDetailDTo;
 import com.example.shop.dto.CartItemDto;
+import com.example.shop.dto.CartOrderDto;
 import com.example.shop.entity.CartItem;
 import com.example.shop.service.CartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -54,9 +56,9 @@ public class CartController {
         try {
             cartItemId = cartService.addCart(cartItemDto, email);
         } catch (Exception e){
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+        return new ResponseEntity<Long>(HttpStatus.OK);
     }
 
     @GetMapping("/cart")
@@ -100,6 +102,25 @@ public class CartController {
         }
         cartService.deleteCartItem(cartItemId);
         return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+    }
+
+    @PostMapping("/cart/orders")
+    public @ResponseBody ResponseEntity<?> orderCartItem(
+            @RequestBody CartOrderDto cartOrderDto, Principal principal
+    ){
+        List<CartOrderDto> cartOrderDtoList = cartOrderDto.getCartOrderDtoList();
+
+        if (cartOrderDtoList == null || cartOrderDtoList.isEmpty()) {
+            return new ResponseEntity<String>("Add at least one item to cart", HttpStatus.FORBIDDEN);
+        }
+
+        for(CartOrderDto cartOrder : cartOrderDtoList){
+            if(!cartService.validateCartItem(cartOrder.getCartItemId(), principal.getName())){
+                return new ResponseEntity<String>("Authorization Failed", HttpStatus.FORBIDDEN);
+            }
+        }
+        Long orderId = cartService.orderCartItem(cartOrderDtoList, principal.getName());
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 
 }

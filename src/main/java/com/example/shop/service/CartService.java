@@ -2,6 +2,8 @@ package com.example.shop.service;
 
 import com.example.shop.dto.CartDetailDTo;
 import com.example.shop.dto.CartItemDto;
+import com.example.shop.dto.CartOrderDto;
+import com.example.shop.dto.OrderDto;
 import com.example.shop.entity.Cart;
 import com.example.shop.entity.CartItem;
 import com.example.shop.entity.Item;
@@ -27,7 +29,7 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final ItemRepository itemRepository;
-
+    private final OrderService orderService;
     /**
      * Adds CartItem to Cart
      * @param cartItemDto which contains information of added item by user
@@ -100,8 +102,41 @@ public class CartService {
         cartItem.updateCount(count);
     }
 
+    // Delete CartItem from CartItemRepository
     public void deleteCartItem(Long cartItemId){
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
         cartItemRepository.delete(cartItem);
     }
+
+    /**
+     * This function places an order and remove all items in cart has been ordered
+     * @param cartOrderDtoList : A List containing cartOrderDto
+     * @param email of logged in member
+     * @return id of Order
+     */
+    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email){
+        List<OrderDto> orderDtoList = new ArrayList<>();
+
+        for(CartOrderDto cartOrderDto : cartOrderDtoList){
+            CartItem cartItem = cartItemRepository.findById(cartOrderDto.getCartItemId()).orElseThrow(EntityNotFoundException::new);
+
+            OrderDto orderDto = new OrderDto();
+            orderDto.setItemId(cartItem.getItem().getId());
+            orderDto.setCount(cartItem.getCount());
+            orderDtoList.add(orderDto);
+        }
+
+        // Makes an order
+        Long orderId = orderService.makeOrder(orderDtoList, email);
+
+        // Delete all items in cart
+        for(CartOrderDto cartOrderDto : cartOrderDtoList){
+            CartItem cartItem = cartItemRepository.findById(cartOrderDto.getCartItemId()).orElseThrow(EntityNotFoundException::new);
+            cartItemRepository.delete(cartItem);
+        }
+
+        return orderId;
+    }
+
+
 }

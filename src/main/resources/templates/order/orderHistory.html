@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" th:href="@{/css/order/orderHistory.css}">
+    <title>Order History</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div id="order-his">
+
+        <div id="order-count" class="box">
+            <span id="order-history">Order History</span>
+            <span th:text="'(' + ${#lists.size(orders)} + ')'">Orders Count</span>
+        </div>
+
+        <div th:each="orderHisDto : ${orders}" class="order-info box">
+            <div class="order-header">
+                <span th:text="${orderHisDto.orderId}">order-id</span>
+                <span th:text="${orderHisDto.orderDate}">order-date</span>
+                <span th:text="${orderHisDto.totalCount} + ' item(s)'">count</span>
+                <span th:text="'$ ' + ${orderHisDto.totalPrice}">price</span>
+            </div>
+
+            <div th:each="orderItemDto: ${orderHisDto.orderItemDtoList}" class="order-content">
+                <img th:src="${orderItemDto.imgUrl}" alt="Item Image" class="pro-image">
+                <span th:text="${orderItemDto.itemName} + ' (Quantity : ' + ${orderItemDto.count} + ')'"
+                      class="pro-name">Product Name</span>
+                <span th:text="'$ ' + ${orderItemDto.totalPrice}" class="pro-price"></span>
+            </div>
+
+            <div class="cancel"
+                 th:data-order-id="${orderHisDto.orderId}"
+                 onclick="cancelOrder(this)"
+                 th:text="${orderHisDto.orderStatus == T(com.example.shop.constant.OrderStatus).ORDER
+                  ? 'Cancel Order' : 'Cancelled'}">>
+                Cancel Order
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/order/orderHistory.js}"></script>
+</th:block>
+</body>
+</html>

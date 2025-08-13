@@ -88,6 +88,48 @@ function removeCart(obj){
             }
         }
     })
+}
 
+function placeOrder(){
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    let url = "/cart/orders";
+
+    let dataList = []; // Array
+    let paramData = {}; // Object
+
+    $("select[name=count]").each(function(){
+        let cartItemId = this.id.split('_')[1];
+        let data = {};
+        data["cartItemId"] = cartItemId;
+        dataList.push(data);
+    });
+
+    paramData["cartOrderDtoList"] = dataList;
+    let param = JSON.stringify(paramData);
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        contentType: "application/json",
+        data: param,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        dataType: "json",
+        cache: false,
+        success: function(result, status) {
+            location.href="/orders";
+        },
+        error: function(jqXHR, status, error) {
+
+            if(jqXHR.status === 401){
+                location.href='members/login';
+            } else {
+                alert(jqXHR.responseText);
+            }
+        }
+
+    })
 
 }

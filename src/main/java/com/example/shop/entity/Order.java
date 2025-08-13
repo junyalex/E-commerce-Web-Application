@@ -67,4 +67,15 @@ public class Order extends BaseEntity{
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    /**
+     * When order is cancelled, it iterates and add stock to cancelled items.
+     */
+    public void cancelOrder(){
+        this.status = OrderStatus.CANCEL;
+
+        for(OrderItem orderItem : orderItems){
+            orderItem.cancel();
+        }
+    }
+
 }
