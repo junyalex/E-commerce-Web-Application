@@ -20,7 +20,7 @@
             <span id="order-history">Order History</span>
             <span th:text="'(' + ${#lists.size(orders)} + ')'">Orders Count</span>
         </div>
-
+`
         <div th:each="orderHisDto : ${orders}" class="order-info box">
             <div class="order-header">
                 <span th:text="${orderHisDto.orderId}">order-id</span>
@@ -44,8 +44,6 @@
                 Cancel Order
             </div>
         </div>
-
-
     </div>
 
 
