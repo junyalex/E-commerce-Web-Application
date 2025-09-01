@@ -125,13 +125,34 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
     }
 
     private BooleanExpression itemNameLike(String searchQuery) {
-        return StringUtils.isEmpty(searchQuery) ? null : QItem.item.itemName.like("%" + searchQuery + "%");
+
+        System.out.println("=== REPOSITORY DEBUG ===");
+        System.out.println("searchQuery received: '" + searchQuery + "'");
+        System.out.println("searchQuery is null: " + (searchQuery == null));
+        System.out.println("StringUtils.isEmpty(searchQuery): " + StringUtils.isEmpty(searchQuery));
+
+        return StringUtils.isEmpty(searchQuery) || searchQuery.trim().isEmpty()
+                ? null
+                : QItem.item.itemName.like("%" + searchQuery.trim() + "%");
     }
 
     @Override
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        System.out.println("=== GET MAIN ITEM PAGE CALLED ===");
+        System.out.println("Method started!");
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
+
+        // 2단계: itemSearchDto 확인
+        System.out.println("itemSearchDto is null: " + (itemSearchDto == null));
+        if (itemSearchDto != null) {
+            System.out.println("itemSearchDto.getSearchQuery(): '" + itemSearchDto.getSearchQuery() + "'");
+        }
+
+        // 3단계: itemNameLike 호출 전 로그
+        System.out.println("About to call itemNameLike...");
+        BooleanExpression nameCondition = itemNameLike(itemSearchDto != null ? itemSearchDto.getSearchQuery() : null);
+        System.out.println("itemNameLike returned: " + (nameCondition == null ? "null" : "condition object"));
 
         List<MainItemDto> results = queryFactory.select(
                         new QMainItemDto(
@@ -158,6 +179,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .fetchOne();
 
         long totalCount = (total != null) ? total : 0L;
+        System.out.println("Total count: " + totalCount);
+        System.out.println("=== END DEBUG ===");
 
         return new PageImpl<>(results, pageable, totalCount);
     }

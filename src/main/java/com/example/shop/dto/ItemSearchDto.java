@@ -19,5 +19,5 @@ public class ItemSearchDto {
     // search item by itemName, createdBy
     private String searchBy;
 
-    private String searchQuery = "";
+    private String searchQuery;
 }

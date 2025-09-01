@@ -44,25 +44,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+    });
+
     // Real-time search functionality
     let debounceTimer;
+
     searchInput.addEventListener('input', function(e) {
         clearTimeout(debounceTimer);
         const query = e.target.value;
 
         debounceTimer = setTimeout(() => {
+
             fetch(`/search/items?query=${encodeURIComponent(query)}`)
                 .then(response => {
+
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
                     return response.text();
                 })
                 .then(html => {
+
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = html;
-
                     const items = tempDiv.querySelectorAll('.h-card');
+
 
                     searchResultsContainer.innerHTML = '';
                     items.forEach(item => {
@@ -70,9 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 })
                 .catch(error => {
-                    console.error('Error fetching search results:', error);
                     searchResultsContainer.innerHTML = '<p class="error-message">Error loading results. Please try again.</p>';
                 });
-        }, 300);
+        }, 600);
     });
 });
