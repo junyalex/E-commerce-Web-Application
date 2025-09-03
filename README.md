@@ -2,6 +2,10 @@
 This is a full-stack e-commerce web application built with Spring Boot for the backend and Thymeleaf for the server-side rendered frontend. The application provides a complete online shopping experience,
 from user registration and product browsing to a fully functional shopping cart and order management system.
 
+# Overview
+<img src="https://github.com/user-attachments/assets/038a87a1-dd9a-48f1-80d6-a5263e64ed1f" width="400" alt="loginvideo">
+<img src="https://github.com/user-attachments/assets/dc7ade0a-45bd-4bc3-8839-3528bc55b906" width="400" alt="generaloverview">
+
 # Features
 For customers : 
 - User Authentication : Secure user registration and login/logout functionality.
