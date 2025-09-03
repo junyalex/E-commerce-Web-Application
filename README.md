@@ -41,4 +41,25 @@ Testing :
 Build Tool : 
 - Maven
 
+# Project Structure
+
+```
+     .
+     ├── src
+     │   ├── main
+     │   │   ├── java/com/example/shop
+     │   │   │   ├── config       # Security, MVC, Audit configurations
+     │   │   │   ├── constant     # Enum types (Roles, Statuses)
+     │   │   │   ├── controller   # Controllers
+     │   │   │   ├── dto          # Data Transfer Objects
+     │   │   │   ├── entity       # JPA entities
+     │   │   │   ├── repository   # Repositories
+     │   │   │   └── service      # Services
+     │   │   └── resources
+     │   │       ├── static       # CSS, JS
+     │   │       ├── templates    # Thymeleaf HTML templates
+     │   │       └── application.properties # Spring Boot configuration
+     │   └── test                 # JUnit5 tests
+     ├── pom.xml                  # Maven project configuration
+```
 
