@@ -29,6 +29,7 @@ Backend :
 - Spring Security
 - Spring Data JPA
 - Spring Web
+- QueryDSL
 - MySQL, H2 (for development)
 
 Frontend :
@@ -63,3 +64,28 @@ Build Tool :
      ├── pom.xml                  # Maven project configuration
 ```
 
+# Installation & Setup
+
+Prerequisites :
+- JDK21 or later
+- Maven 3.x
+- MySQL Server
+
+1. Clone Repository
+
+```bash
+git clone https://github.com/junyalex/E-commerce-Web-Application.git
+cd shop ( Root directory )
+```
+
+2. Configure the database:
+- Open src/main/resources/application.properties.
+- Update the spring.datasource.url, spring.datasource.username, and password properties to match your local MySQL setup.
+- Create a database schema named shop. <br>
+ CREATE DATABASE shop;
+
+3. Run the project
+- On Windows:  mvnw.cmd spring-boot:run
+- On macOS/Linux: ./mvnw spring-boot:run
+
+The application will be accessible at http://localhost
