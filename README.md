@@ -85,7 +85,52 @@ cd shop ( Root directory )
  CREATE DATABASE shop;
 
 3. Run the project
-- On Windows:  mvnw.cmd spring-boot:run
-- On macOS/Linux: ./mvnw spring-boot:run
+- -   On Windows (using PowerShell):
+    ```powershell
+    .\mvnw.cmd spring-boot:run
+    ```
+-   On macOS/Linux:
+    ```bash
+    ./mvnw spring-boot:run
+    ```
 
 The application will be accessible at http://localhost
+
+## Default Administrator Account
+(Configuration can be found in `src/main/java/com/example/shop/config/DataInitializer.java`)
+- **Email**: admin@test.com  
+- **Password**: 1234
+
+## API Endpoints
+
+### Public Endpoints
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Home page |
+| GET | `/members/login` | Login page |
+| GET | `/members/login/error` | Page shown on login failure   |
+| GET | `/members/new` | Sign up page |
+| POST | `/members/new` | Process user registration |
+| GET | `/items/{itemType}` | Product listing page by category |
+| GET | `/item/{itemId}` | Product details page |
+| GET | `/search/items` | AJAX endpoint - returns search results as HTML fragment |
+
+### User Endpoints (Authentication Required)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/cart` | View shopping cart page |
+| POST | `/cart` | Add item to cart |
+| PATCH | `/cartItem/{cartItemId}` | Update cart item quantity |
+| DELETE | `/cartItem/{cartItemId}` | Remove item from cart |
+| POST | `/cart/orders` | Place an order |
+| GET | `/orders` | View user's order history |
+| POST | `/order/{orderId}/cancel` | Cancel a specific order |
+
+### Admin Endpoints (Admin Role Required)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/admin/item/new` | Display page to register    |
+| POST | `/admin/item/new` | Process new product creation  |
+| GET | `/admin/items or /admin/items/{page}` | Product management and listing page |
+| GET | `/admin/item/{itemId}` | Display page to edit a specific product |
+| POST | `/admin/item/{itemId}` | Process updates for a specific product |
